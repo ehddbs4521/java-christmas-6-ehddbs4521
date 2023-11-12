@@ -29,4 +29,10 @@ public class InputValidator {
         if(count==(long)input.size()) return;
         error(ORDER_WRONG_MESSAGE.get());
     }
+
+    public void validateDuplicateMenu(List<String> input) {
+        if(input.stream().distinct().count()==(long) input.size()) return;
+        error(ORDER_WRONG_MESSAGE.get());
+    }
+
 }

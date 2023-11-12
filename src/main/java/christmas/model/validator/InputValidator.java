@@ -1,5 +1,7 @@
 package christmas.model.validator;
 
+import christmas.model.order.MenuAndPrice;
+
 import java.util.List;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
@@ -12,6 +14,8 @@ import static christmas.model.validator.Regex.CHECK_MENU_AND_COUNT;
 import static christmas.model.validator.Regex.CHECK_NUMERIC;
 
 public class InputValidator {
+    MenuAndPrice menuAndPrice = new MenuAndPrice();
+
     private static final Pattern NUMERIC = Pattern.compile(CHECK_NUMERIC.get());
     private static final Pattern MenuAndCount=Pattern.compile(CHECK_MENU_AND_COUNT.get());
     public void validateNumber(String input) {
@@ -35,4 +39,11 @@ public class InputValidator {
         error(ORDER_WRONG_MESSAGE.get());
     }
 
+    public void validateExistMenu(List<String> input) {
+        long count = input.stream()
+                .filter(menuName -> menuAndPrice.menu.values().stream().anyMatch(subMap -> subMap.containsKey(menuName)))
+                .count();
+        if(count==(long) input.size()) return;
+        error(ORDER_WRONG_MESSAGE.get());
+    }
 }

@@ -27,10 +27,9 @@ public class Price {
 
     private void getAfterDiscountPrice() {
         if (issDiscountPrice()&&WEEKENDORNOT.equals(WEEKEND.get())) {
-
+            System.out.println(1);
         }
     }
-    private
     private boolean issDiscountPrice() {
         if(getBeforeDiscountPrice()>=START_DISCOUNT_PRICE.get()) return true;
         return false;

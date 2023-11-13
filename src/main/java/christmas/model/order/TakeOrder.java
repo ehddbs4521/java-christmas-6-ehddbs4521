@@ -21,6 +21,7 @@ public class TakeOrder {
         validateDuplicateMenu(new ArrayList<>(order.keySet()));
         validateMenuAndCount(orderList);
         validateOverTwenty(new ArrayList<>(order.values()));
+        validateNotOrderOnlyBeverage(new ArrayList<>(order.keySet()));
 
     }
 

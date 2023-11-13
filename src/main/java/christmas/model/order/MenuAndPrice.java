@@ -1,5 +1,6 @@
 package christmas.model.order;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,6 +16,11 @@ public class MenuAndPrice {
     Map<String, Integer> dessertMenu = new HashMap<>();
     Map<String, Integer> beverageMenu = new HashMap<>();
     public Map<String, Map<String, Integer>> menu = new HashMap<>();
+
+    public Collection<Map<String, Integer>> getMenuValues() {
+        Collection<Map<String, Integer>> values = menu.values();
+        return values;
+    }
 
     public MenuAndPrice() {
         appetiezerPut();

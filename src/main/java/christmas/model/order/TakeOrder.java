@@ -11,8 +11,8 @@ import static christmas.model.validator.StringConstant.HYPHEN;
 
 public class TakeOrder {
 
-    Map<String, Integer> order = new HashMap<>();
-    public List<String> orderList;
+    private Map<String, Integer> order = new HashMap<>();
+    private List<String> orderList;
 
     public TakeOrder(List<String> orderList) {
         this.orderList=new ArrayList<>(orderList);
@@ -34,6 +34,9 @@ public class TakeOrder {
     }
     public List<String> getOrderList() {
         return orderList;
+    }
+    public Map<String,Integer> getOrderMap() {
+        return order;
     }
 
 }

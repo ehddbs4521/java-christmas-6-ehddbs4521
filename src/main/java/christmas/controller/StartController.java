@@ -17,17 +17,19 @@ public class StartController {
     VisitDate visitDate;
     Order order;
     private static String WEEKENDORNOT;
+    private static String date;
 
     public void start() {
         outputView.printWelcomeMessage();
         askDate();
         askMenuAndCount();
+        outputView.printSaleIntroduceMessage(Integer.parseInt(date));
     }
 
     private void askDate() {
         while (true) {
             try {
-                String date = inputView.printVisitDateMessage();
+                date = inputView.printVisitDateMessage();
                 visitDate = new VisitDate(date);
                 break;
             } catch (IllegalArgumentException e) {

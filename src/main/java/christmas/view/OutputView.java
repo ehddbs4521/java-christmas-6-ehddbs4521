@@ -11,8 +11,8 @@ public class OutputView {
         printMessage(START_PLANNER_MESSAGE.get());
     }
 
-    public void printSaleIntroduceMessage() {
-        printMessage(PRE_EVENT_BENEFIT_MESSAGE.get());
+    public void printSaleIntroduceMessage(int date) {
+        printMessage(String.format(PRE_EVENT_BENEFIT_MESSAGE.get(),date));
     }
 
     public void printOrderMessage() {

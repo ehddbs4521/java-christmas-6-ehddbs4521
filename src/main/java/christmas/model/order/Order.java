@@ -16,17 +16,14 @@ public class Order {
     public Order(List<String> orderList) {
         seperateMenuNameAndPrice(orderList);
         validateExistMenu(new ArrayList<>(order.keySet()));
-        System.out.println(1);
         validateDuplicateMenu(new ArrayList<>(order.keySet()));
-        System.out.println(2);
         validateMenuAndCount(orderList);
-        System.out.println(3);
 
     }
 
     private void seperateMenuNameAndPrice(List<String> orderList) {
         order = orderList.stream()
-                .map(menu -> menu.split("-"))
+                .map(menu -> menu.split(HYPHEN.get()))
                 .collect(Collectors.toMap(
                         splitMenu -> splitMenu[0],
                         splitMenu -> Integer.parseInt(splitMenu[1]),

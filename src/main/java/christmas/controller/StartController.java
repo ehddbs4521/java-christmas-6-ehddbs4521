@@ -46,8 +46,8 @@ public class StartController {
                 date = inputView.printVisitDateMessage();
                 visitDate = new VisitDate(date);
                 break;
-            } catch (IllegalArgumentException e) {
-                outputView.printMessage(e.getMessage());
+            } catch (IllegalArgumentException error) {
+                outputView.printMessage(error.getMessage());
             }
         }
         WEEKENDORNOT = visitDate.weekendOrNot(visitDate.getDate());

@@ -11,7 +11,6 @@ public class VisitDate {
     private String date;
 
     public VisitDate(String date) {
-        validateNumber(date);
         validateDate(date);
         this.date = date;
     }

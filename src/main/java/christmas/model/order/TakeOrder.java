@@ -16,10 +16,10 @@ public class TakeOrder {
 
     public TakeOrder(List<String> orderList) {
         this.orderList=new ArrayList<>(orderList);
+        validateMenuAndCount(orderList);
         seperateMenuNameAndPrice(orderList);
         validateExistMenu(new ArrayList<>(order.keySet()));
         validateDuplicateMenu(new ArrayList<>(order.keySet()));
-        validateMenuAndCount(orderList);
         validateOverTwenty(new ArrayList<>(order.values()));
         validateNotOrderOnlyBeverage(new ArrayList<>(order.keySet()));
 

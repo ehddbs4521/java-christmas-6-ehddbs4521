@@ -9,11 +9,13 @@ import java.util.stream.Collectors;
 import static christmas.model.validator.InputValidator.*;
 import static christmas.model.validator.StringConstant.HYPHEN;
 
-public class Order {
+public class TakeOrder {
 
     Map<String, Integer> order = new HashMap<>();
+    public List<String> orderList;
 
-    public Order(List<String> orderList) {
+    public TakeOrder(List<String> orderList) {
+        this.orderList=new ArrayList<>(orderList);
         seperateMenuNameAndPrice(orderList);
         validateExistMenu(new ArrayList<>(order.keySet()));
         validateDuplicateMenu(new ArrayList<>(order.keySet()));
@@ -29,6 +31,9 @@ public class Order {
                         splitMenu -> Integer.parseInt(splitMenu[1]),
                         (existing, replacement) -> replacement
                 ));
+    }
+    public List<String> getOrderList() {
+        return orderList;
     }
 
 }

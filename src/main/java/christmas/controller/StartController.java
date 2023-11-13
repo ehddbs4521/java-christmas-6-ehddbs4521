@@ -1,6 +1,6 @@
 package christmas.controller;
 
-import christmas.model.order.Order;
+import christmas.model.order.TakeOrder;
 import christmas.model.order.VisitDate;
 import christmas.view.InputView;
 import christmas.view.OutputView;
@@ -15,7 +15,7 @@ public class StartController {
     InputView inputView = new InputView();
     OutputView outputView = new OutputView();
     VisitDate visitDate;
-    Order order;
+    TakeOrder takeOrder;
     private static String WEEKENDORNOT;
     private static String date;
 
@@ -24,6 +24,12 @@ public class StartController {
         askDate();
         askMenuAndCount();
         outputView.printSaleIntroduceMessage(Integer.parseInt(date));
+        outputView.printOrderMessage();
+        showOrderList();
+    }
+
+    private void showOrderList() {
+        takeOrder.getOrderList().stream().forEach(System.out::println);
     }
 
     private void askDate() {
@@ -44,7 +50,7 @@ public class StartController {
         while (true) {
             try {
                 String menuAndCount = inputView.printOrderAndCount();
-                new Order(Arrays.asList(menuAndCount.split(COMMA.get())));
+                takeOrder=new TakeOrder(getMenuAndCount(menuAndCount));
                 break;
             } catch (IllegalArgumentException e) {
                 outputView.printMessage(e.getMessage());
@@ -52,5 +58,8 @@ public class StartController {
         }
     }
 
+    private static List<String> getMenuAndCount(String menuAndCount) {
+        return Arrays.asList(menuAndCount.split(COMMA.get()));
+    }
 
 }

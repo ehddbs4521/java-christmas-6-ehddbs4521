@@ -20,6 +20,7 @@ public class TakeOrder {
         validateExistMenu(new ArrayList<>(order.keySet()));
         validateDuplicateMenu(new ArrayList<>(order.keySet()));
         validateMenuAndCount(orderList);
+        validateOverTwenty(new ArrayList<>(order.values()));
 
     }
 

@@ -21,7 +21,7 @@ public class StartController {
     VisitDate visitDate;
     TakeOrder takeOrder;
     Price price;
-    private static String WEEKENDORNOT;
+    public static String WEEKENDORNOT;
     private static String date;
 
     public void start() {

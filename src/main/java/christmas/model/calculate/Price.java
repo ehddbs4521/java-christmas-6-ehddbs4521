@@ -5,7 +5,9 @@ import christmas.model.order.MenuAndPrice;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static christmas.controller.StartController.WEEKENDORNOT;
 import static christmas.model.validator.IntegerConstant.START_DISCOUNT_PRICE;
+import static christmas.model.validator.StringConstant.WEEKEND;
 
 public class Price {
     MenuAndPrice menuAndPrice = new MenuAndPrice();
@@ -23,7 +25,13 @@ public class Price {
         return price.stream().mapToInt(Integer::intValue).sum();
     }
 
-    public boolean getAfterDiscountPrice() {
+    private void getAfterDiscountPrice() {
+        if (issDiscountPrice()&&WEEKENDORNOT.equals(WEEKEND.get())) {
+
+        }
+    }
+    private
+    private boolean issDiscountPrice() {
         if(getBeforeDiscountPrice()>=START_DISCOUNT_PRICE.get()) return true;
         return false;
     }

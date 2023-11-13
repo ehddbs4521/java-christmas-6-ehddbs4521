@@ -2,13 +2,17 @@ package christmas.model.order;
 
 import java.util.List;
 
+import static christmas.model.validator.InputValidator.validateDate;
+import static christmas.model.validator.InputValidator.validateNumber;
 import static christmas.model.validator.StringConstant.WEEKDAY;
 import static christmas.model.validator.StringConstant.WEEKEND;
 
-public class Date {
+public class VisitDate {
     private String date;
 
-    public Date(String date) {
+    public VisitDate(String date) {
+        validateNumber(date);
+        validateDate(date);
         this.date = date;
     }
 
@@ -17,5 +21,9 @@ public class Date {
             return WEEKEND.get();
         }
         return WEEKDAY.get();
+    }
+
+    public String getDate() {
+        return date;
     }
 }

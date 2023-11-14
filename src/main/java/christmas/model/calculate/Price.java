@@ -36,29 +36,29 @@ public class Price {
         isDiscountPrice(date);
     }
     private void isDiscountPrice(String date) {
-        if(getBeforeDiscountPrice()<MINIMUM_DISCOUNT_PRICE.get()) return;
+        if(beforeDiscountPrice<MINIMUM_DISCOUNT_PRICE.get()) return;
         if (getChristmasDDayDiscount(date)) christMasDDayDiscount(date);
-        if(getWeekDayDiscount(date)) weekDayDiscount();
+        if(getWeekDayDiscount()) weekDayDiscount();
         if(getWeekendDayDiscount(date)) weekEndDiscount();
         if(getSpecialDayDiscount()) specialDayDiscount();
         if(getPresentation()) presentationDiscount();
     }
 
     private boolean getChristmasDDayDiscount(String date) {
-        if(Integer.parseInt(date)<= CHRISTMAS_DATE.get()) return false;
-        return true;
+        if(Integer.parseInt(date)<= CHRISTMAS_DATE.get()) return true;
+        return false;
     }
 
     private void christMasDDayDiscount(String date) {
         discount.put(CHRISTMAS_EVENT.get(),START_DISCOUNT_PRICE.get()+(Integer.parseInt(date)-1)*INCREASE_DISCOUNT_PRICE.get());
     }
-    private boolean getWeekDayDiscount(String date) {
+    private boolean getWeekDayDiscount() {
         if(WEEKENDORNOT.equals(WEEKDAY.get())) return true;
         return false;
     }
 
     private void weekDayDiscount() {
-        List<Integer> weekDiscount = menuAndPrice.getBeveragetValues().entrySet().stream()
+        List<Integer> weekDiscount = menuAndPrice.getDessertValues().entrySet().stream()
                 .filter(menuEntry -> order.containsKey(menuEntry.getKey()))
                 .map(menuEntry -> order.get(menuEntry.getKey()) * DAY_DISCOUNT.get())
                 .collect(Collectors.toList());
@@ -79,7 +79,7 @@ public class Price {
     }
 
     private boolean getSpecialDayDiscount() {
-        if(SPECIALORNOT.equals(SPECIAL)) return true;
+        if(SPECIALORNOT.equals(SPECIAL.get())) return true;
         return false;
     }
 

@@ -38,15 +38,11 @@ public class StartController {
         outputView.printFreebieMessage();
         price.getBeforeDiscountPrice();
         showPresentation();
+        outputView.printBenefitMessage();
+        showBenefitList();
+        outputView.printTotalBenefitPriceMessage();
     }
 
-    private void showPresentation() {
-        if(price.getDiscount().containsKey(PRESENTATION_EVENT.get())) {
-            System.out.println(CHAMPAGNE.get());
-            return;
-        }
-        System.out.println(NOTHING.get());
-    }
 
     private void showOrderList() {
         takeOrder.getOrderList().stream().forEach(System.out::println);
@@ -71,7 +67,7 @@ public class StartController {
         while (true) {
             try {
                 String menuAndCount = inputView.printOrderAndCount();
-                takeOrder=new TakeOrder(getMenuAndCount(menuAndCount));
+                takeOrder = new TakeOrder(getMenuAndCount(menuAndCount));
                 break;
             } catch (IllegalArgumentException e) {
                 outputView.printMessage(e.getMessage());
@@ -80,11 +76,29 @@ public class StartController {
     }
 
     private void showBeforeDiscountPrice() {
-        price=new Price(takeOrder.getOrderMap());
+        price = new Price(takeOrder.getOrderMap());
         String price = decimalFormat.format(this.price.getBeforeDiscountPrice());
-        System.out.println(price+ WON.get());
+        System.out.println(price + WON.get());
 
     }
+
+    private void showPresentation() {
+        if (price.getDiscount().containsKey(PRESENTATION_EVENT.get())) {
+            System.out.println(CHAMPAGNE.get());
+            return;
+        }
+        System.out.println(NOTHING.get());
+    }
+
+    private void showBenefitList() {
+        if(price.getDiscount().isEmpty()){
+            System.out.println(NOTHING.get());
+            return;
+        }
+        price.getDiscount().entrySet().stream()
+                .map(entry -> String.format("%s-%s",entry.getKey(),decimalFormat.format(entry.getValue())))
+                .forEach(System.out::println);    }
+
     private static List<String> getMenuAndCount(String menuAndCount) {
         return Arrays.asList(menuAndCount.split(COMMA.get()));
     }

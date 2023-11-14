@@ -3,6 +3,7 @@ package christmas.controller;
 import christmas.model.calculate.Price;
 import christmas.model.order.TakeOrder;
 import christmas.model.order.VisitDate;
+import christmas.model.validator.IntegerConstant;
 import christmas.view.InputView;
 import christmas.view.OutputView;
 
@@ -11,6 +12,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static christmas.model.calculate.Event.PRESENTATION_EVENT;
+import static christmas.model.calculate.Event.SPECIAL_EVENT;
 import static christmas.model.validator.IntegerConstant.ZERO;
 import static christmas.model.validator.StringConstant.*;
 
@@ -44,6 +46,8 @@ public class StartController {
         showBenefitList();
         outputView.printTotalBenefitPriceMessage();
         showTotalBenefitPrice();
+        outputView.printAfterDiscountMessage();
+        showFinalPrice();
     }
 
     private void showOrderList() {
@@ -86,7 +90,7 @@ public class StartController {
 
     private void showPresentation() {
         if (price.getDiscount().containsKey(PRESENTATION_EVENT.get())) {
-            System.out.println(CHAMPAGNE.get());
+            System.out.println(CHAMPAGNE_ONE.get());
             return;
         }
         System.out.println(NOTHING.get());
@@ -108,7 +112,25 @@ public class StartController {
         }
         System.out.println(String.format("-%s%s",decimalFormat.format(discountPrice),WON.get()));
     }
+    private void showFinalPrice() {
+        if (excludeChampagnePrice()){
+            System.out.println(String.format("%s%s",
+                    decimalFormat.format(price.beforeDiscountPrice - discountPrice), WON.get())
+            );
+            return;
+        }
+        System.out.println(String.format("%s%s",
+                decimalFormat.format(price.beforeDiscountPrice - discountPrice + IntegerConstant.CHAMPAGNE.get()), WON.get())
+        );
+    }
     private static List<String> getMenuAndCount(String menuAndCount) {
         return Arrays.asList(menuAndCount.split(COMMA.get()));
+    }
+
+    private boolean excludeChampagnePrice() {
+        if (takeOrder.getOrderList().contains(CHAMPAGNE.get()) && price.getDiscount().containsKey(SPECIAL_EVENT.get())) {
+            return true;
+        }
+        return false;
     }
 }

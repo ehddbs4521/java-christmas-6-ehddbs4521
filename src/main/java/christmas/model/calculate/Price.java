@@ -17,11 +17,10 @@ public class Price {
     Map<String,Integer> order;
     Map<String, Integer> discount = new HashMap<>();
 
-    private int beforeDiscountPrice;
+    public int beforeDiscountPrice;
     public Price(Map<String,Integer> order) {
         this.order = order;
     }
-
     public int getBeforeDiscountPrice() {
         List<Integer> price = menuAndPrice.getMenuValues().stream()
                 .flatMap(categoryMenu -> categoryMenu.entrySet().stream())

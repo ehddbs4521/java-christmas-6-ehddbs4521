@@ -39,7 +39,6 @@ public class Price {
         if(getWeekDayDiscount(date)) weekDayDiscount();
         if(getWeekendDayDiscount(date)) weekEndDiscount();
         if(getSpecialDayDiscount()) specialDayDiscount();
-        if(getPresentationDiscount())
     }
 
     private boolean getChristmasDDayDiscount(String date) {

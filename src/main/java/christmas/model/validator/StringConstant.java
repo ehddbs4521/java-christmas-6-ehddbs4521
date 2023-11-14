@@ -9,6 +9,8 @@ public enum StringConstant {
     BEVERAGE("음료"),
     SPECIAL("special"),
     NOT_SPECIAL("not-special"),
+    CHAMPAGNE("샴페인 1개\n"),
+    NOTHING("없음"),
     ;
 
     private final String str;

@@ -44,7 +44,7 @@ public class InputValidator {
 
     public static void validateNotOrderOnlyBeverage(List<String> input) {
         long count = menuAndPrice.menu.get(BEVERAGE.get()).keySet().stream().filter(menu -> menu.equals(input.get(0))).count();
-        if(count==0) return;
+        if(count==0||(count==1||input.size()>0)) return;
         error(ORDER_WRONG_MESSAGE.get());
     }
     public static void validateDuplicateMenu(List<String> input) {

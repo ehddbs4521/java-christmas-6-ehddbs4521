@@ -10,8 +10,8 @@ import java.text.DecimalFormat;
 import java.util.Arrays;
 import java.util.List;
 
-import static christmas.model.validator.StringConstant.COMMA;
-import static christmas.model.validator.StringConstant.WON;
+import static christmas.model.calculate.Event.PRESENTATION_EVENT;
+import static christmas.model.validator.StringConstant.*;
 
 
 public class StartController {
@@ -35,7 +35,17 @@ public class StartController {
         outputView.printBeforeDiscountMessage();
         showBeforeDiscountPrice();
         price.getAfterDiscountPrice(date);
+        outputView.printFreebieMessage();
+        price.getBeforeDiscountPrice();
+        showPresentation();
+    }
 
+    private void showPresentation() {
+        if(price.getDiscount().containsKey(PRESENTATION_EVENT.get())) {
+            System.out.println(CHAMPAGNE.get());
+            return;
+        }
+        System.out.println(NOTHING.get());
     }
 
     private void showOrderList() {

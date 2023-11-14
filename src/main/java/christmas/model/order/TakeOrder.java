@@ -22,6 +22,7 @@ public class TakeOrder {
         validateDuplicateMenu(new ArrayList<>(order.keySet()));
         validateOverTwenty(new ArrayList<>(order.values()));
         validateNotOrderOnlyBeverage(new ArrayList<>(order.keySet()));
+        System.out.println(6);
 
     }
 

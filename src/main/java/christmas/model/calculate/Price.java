@@ -9,13 +9,15 @@ import static christmas.controller.StartController.SPECIALORNOT;
 import static christmas.controller.StartController.WEEKENDORNOT;
 import static christmas.model.calculate.Event.*;
 import static christmas.model.validator.IntegerConstant.*;
+import static christmas.model.validator.IntegerConstant.CHAMPAGNE;
 import static christmas.model.validator.StringConstant.*;
 
 public class Price {
     MenuAndPrice menuAndPrice = new MenuAndPrice();
     Map<String,Integer> order;
     Map<String, Integer> discount = new HashMap<>();
-    int beforeDiscountPrice;
+
+    private int beforeDiscountPrice;
     public Price(Map<String,Integer> order) {
         this.order = order;
     }
@@ -31,9 +33,9 @@ public class Price {
     }
 
     public void getAfterDiscountPrice(String date) {
-        issDiscountPrice(date);
+        isDiscountPrice(date);
     }
-    private void issDiscountPrice(String date) {
+    private void isDiscountPrice(String date) {
         if(getBeforeDiscountPrice()<MINIMUM_DISCOUNT_PRICE.get()) return;
         if (getChristmasDDayDiscount(date)) christMasDDayDiscount(date);
         if(getWeekDayDiscount(date)) weekDayDiscount();
@@ -92,6 +94,10 @@ public class Price {
 
     private void presentationDiscount() {
         discount.put(PRESENTATION_EVENT.get(), CHAMPAGNE.get());
+    }
+
+    public Map<String, Integer> getDiscount() {
+        return discount;
     }
 
 }

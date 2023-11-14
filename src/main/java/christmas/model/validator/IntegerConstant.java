@@ -9,6 +9,7 @@ public enum IntegerConstant {
     DAY_DISCOUNT(2023),
     MINIMUM_DISCOUNT_PRICE(10000),
     MAX_ORDER_COUNT(20),
+    SPECIAL_DISCOUNT_PRICE(1000),
     ;
     private final Integer number;
 

@@ -17,11 +17,6 @@ public class MenuAndPrice {
     Map<String, Integer> beverageMenu = new HashMap<>();
     public Map<String, Map<String, Integer>> menu = new HashMap<>();
 
-    public Collection<Map<String, Integer>> getMenuValues() {
-        Collection<Map<String, Integer>> values = menu.values();
-        return values;
-    }
-
     public MenuAndPrice() {
         appetiezerPut();
         mainMenuPut();
@@ -30,7 +25,23 @@ public class MenuAndPrice {
         menuPut();
     }
 
+    public Collection<Map<String, Integer>> getMenuValues() {
+        Collection<Map<String, Integer>> values = menu.values();
+        return values;
+    }
 
+    public Map<String, Integer> getAppetizerValues() {
+        return beverageMenu;
+    }
+    public Map<String, Integer> getMainValues() {
+        return mainMenu;
+    }
+    public Map<String, Integer> getDessertValues() {
+        return dessertMenu;
+    }
+    public Map<String, Integer> getBeveragetValues() {
+        return beverageMenu;
+    }
     private void menuPut() {
         menu.put(APPETIZER, appetizerMenu);
         menu.put(MAIN, mainMenu);

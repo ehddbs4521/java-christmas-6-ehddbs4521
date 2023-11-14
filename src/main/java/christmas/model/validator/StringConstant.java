@@ -6,6 +6,9 @@ public enum StringConstant {
     WEEKEND("weekend"),
     WEEKDAY("weekday"),
     WON("원"),
+    BEVERAGE("음료"),
+    SPECIAL("special"),
+    NOT_SPECIAL("not-special"),
     ;
 
     private final String str;

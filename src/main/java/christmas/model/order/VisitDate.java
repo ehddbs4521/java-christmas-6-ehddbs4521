@@ -3,9 +3,7 @@ package christmas.model.order;
 import java.util.List;
 
 import static christmas.model.validator.InputValidator.validateDate;
-import static christmas.model.validator.InputValidator.validateNumber;
-import static christmas.model.validator.StringConstant.WEEKDAY;
-import static christmas.model.validator.StringConstant.WEEKEND;
+import static christmas.model.validator.StringConstant.*;
 
 public class VisitDate {
     private String date;
@@ -13,6 +11,13 @@ public class VisitDate {
     public VisitDate(String date) {
         validateDate(date);
         this.date = date;
+    }
+
+    public String specialDayOrNot(String date) {
+        if (List.of("3", "10", "17", "24", "25", "31").contains(date)) {
+            return SPECIAL.get();
+        }
+        return NOT_SPECIAL.get();
     }
 
     public String weekendOrNot(String date) {

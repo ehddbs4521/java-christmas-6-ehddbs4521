@@ -21,6 +21,7 @@ public class StartController {
     VisitDate visitDate;
     TakeOrder takeOrder;
     Price price;
+    public static String SPECIALORNOT;
     public static String WEEKENDORNOT;
     private static String date;
 
@@ -33,6 +34,7 @@ public class StartController {
         showOrderList();
         outputView.printBeforeDiscountMessage();
         showBeforeDiscountPrice();
+        price.getAfterDiscountPrice(date);
 
     }
 
@@ -50,6 +52,7 @@ public class StartController {
                 outputView.printMessage(error.getMessage());
             }
         }
+        SPECIALORNOT = visitDate.specialDayOrNot(visitDate.getDate());
         WEEKENDORNOT = visitDate.weekendOrNot(visitDate.getDate());
 
     }

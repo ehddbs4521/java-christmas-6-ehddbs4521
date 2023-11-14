@@ -39,6 +39,7 @@ public class Price {
         if(getWeekDayDiscount(date)) weekDayDiscount();
         if(getWeekendDayDiscount(date)) weekEndDiscount();
         if(getSpecialDayDiscount()) specialDayDiscount();
+        if(getPresentation()) presentationDiscount();
     }
 
     private boolean getChristmasDDayDiscount(String date) {
@@ -84,5 +85,13 @@ public class Price {
         discount.put(SPECIAL_EVENT.get(),SPECIAL_DISCOUNT_PRICE.get());
     }
 
+    private boolean getPresentation() {
+        if(beforeDiscountPrice>=PRESENTATION_CONDITION_PRICE.get()) return true;
+        return false;
+    }
+
+    private void presentationDiscount() {
+        discount.put(PRESENTATION_EVENT.get(), CHAMPAGNE.get());
+    }
 
 }

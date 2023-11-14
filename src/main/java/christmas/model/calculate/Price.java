@@ -9,7 +9,7 @@ import static christmas.controller.StartController.SPECIALORNOT;
 import static christmas.controller.StartController.WEEKENDORNOT;
 import static christmas.model.calculate.Event.*;
 import static christmas.model.validator.IntegerConstant.*;
-import static christmas.model.validator.IntegerConstant.CHAMPAGNE;
+import static christmas.model.validator.IntegerConstant.CHAMPAGNE_PRICE;
 import static christmas.model.validator.StringConstant.*;
 
 public class Price {
@@ -92,7 +92,7 @@ public class Price {
     }
 
     private void presentationDiscount() {
-        discount.put(PRESENTATION_EVENT.get(), CHAMPAGNE.get());
+        discount.put(PRESENTATION_EVENT.get(), CHAMPAGNE_PRICE.get());
     }
 
     public Map<String, Integer> getDiscount() {

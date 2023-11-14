@@ -11,8 +11,11 @@ public enum IntegerConstant {
     MAX_ORDER_COUNT(20),
     SPECIAL_DISCOUNT_PRICE(1000),
     PRESENTATION_CONDITION_PRICE(120000),
-    CHAMPAGNE(25000),
+    CHAMPAGNE_PRICE(25000),
     ZERO(0),
+    FIVE_THOUSAND(5000),
+    TEN_THOUSAND(10000),
+    TWENTY_THOUSAND(20000),
     ;
     private final Integer number;
 

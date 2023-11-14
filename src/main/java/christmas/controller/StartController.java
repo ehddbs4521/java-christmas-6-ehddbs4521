@@ -4,6 +4,7 @@ import christmas.model.calculate.Price;
 import christmas.model.order.TakeOrder;
 import christmas.model.order.VisitDate;
 import christmas.model.validator.IntegerConstant;
+import christmas.model.validator.StringConstant;
 import christmas.view.InputView;
 import christmas.view.OutputView;
 
@@ -11,9 +12,8 @@ import java.text.DecimalFormat;
 import java.util.Arrays;
 import java.util.List;
 
-import static christmas.model.calculate.Event.PRESENTATION_EVENT;
-import static christmas.model.calculate.Event.SPECIAL_EVENT;
-import static christmas.model.validator.IntegerConstant.ZERO;
+import static christmas.model.calculate.Event.*;
+import static christmas.model.validator.IntegerConstant.*;
 import static christmas.model.validator.StringConstant.*;
 
 
@@ -48,6 +48,8 @@ public class StartController {
         showTotalBenefitPrice();
         outputView.printAfterDiscountMessage();
         showFinalPrice();
+        outputView.printBadgeMessage();
+        showBadge();
     }
 
     private void showOrderList() {
@@ -120,17 +122,54 @@ public class StartController {
             return;
         }
         System.out.println(String.format("%s%s",
-                decimalFormat.format(price.beforeDiscountPrice - discountPrice + IntegerConstant.CHAMPAGNE.get()), WON.get())
+                decimalFormat.format(price.beforeDiscountPrice - discountPrice + IntegerConstant.CHAMPAGNE_PRICE.get()), WON.get())
         );
     }
-    private static List<String> getMenuAndCount(String menuAndCount) {
-        return Arrays.asList(menuAndCount.split(COMMA.get()));
-    }
-
     private boolean excludeChampagnePrice() {
-        if (takeOrder.getOrderList().contains(CHAMPAGNE.get()) && price.getDiscount().containsKey(SPECIAL_EVENT.get())) {
+        if (takeOrder.getOrderList().contains(StringConstant.CHAMPAGNE) && price.getDiscount().containsKey(SPECIAL_EVENT.get())) {
             return true;
         }
         return false;
+    }
+
+    private void showBadge() {
+        if (noBadge()) return;
+        if (starBadge()) return;
+        if (treeBadge()) return;
+        santaBadge();
+    }
+
+    private static void santaBadge() {
+        if (discountPrice >= TWENTY_THOUSAND.get()) {
+            System.out.println(SANTA.get());
+        }
+    }
+
+    private static boolean treeBadge() {
+        if (discountPrice >= TEN_THOUSAND.get() && discountPrice < TWENTY_THOUSAND.get()) {
+            System.out.println(TREE.get());
+            return true;
+        }
+        return false;
+    }
+
+    private static boolean starBadge() {
+        if (discountPrice >= FIVE_THOUSAND.get() && discountPrice < TEN_THOUSAND.get()) {
+            System.out.println(STAR.get());
+            return true;
+        }
+        return false;
+    }
+
+    private static boolean noBadge() {
+        if (discountPrice < FIVE_THOUSAND.get()) {
+            System.out.println(NOTHING.get());
+            return true;
+        }
+        return false;
+    }
+
+    private static List<String> getMenuAndCount(String menuAndCount) {
+        return Arrays.asList(menuAndCount.split(COMMA.get()));
     }
 }

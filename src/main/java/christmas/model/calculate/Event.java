@@ -6,6 +6,9 @@ public enum Event {
     WEEKEND_EVENT("주말 할인: "),
     SPECIAL_EVENT("특별 할인: "),
     PRESENTATION_EVENT("증정 할인: "),
+    STAR("별"),
+    TREE("트리"),
+    SANTA("산타"),
     ;
     private final String eventName;
 

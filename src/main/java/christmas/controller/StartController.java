@@ -30,26 +30,58 @@ public class StartController {
     private static int discountPrice;
 
     public void start() {
+        askDateAndMenu();
+        orderResult();
+        priceResult();
+        presentationResult();
+        benefitResult();
+        totalBenefitPriceResult();
+        finalPriceResult();
+        badgeResult();
+    }
+
+    private void badgeResult() {
+        outputView.printBadgeMessage();
+        showBadge();
+    }
+
+    private void finalPriceResult() {
+        outputView.printAfterDiscountMessage();
+        showFinalPrice();
+    }
+
+    private void totalBenefitPriceResult() {
+        outputView.printTotalBenefitPriceMessage();
+        showTotalBenefitPrice();
+    }
+
+    private void benefitResult() {
+        outputView.printBenefitMessage();
+        showBenefitList();
+    }
+
+    private void presentationResult() {
+        outputView.printFreebieMessage();
+        showPresentation();
+    }
+
+    private void priceResult() {
+        outputView.printBeforeDiscountMessage();
+        showBeforeDiscountPrice();
+        price.getAfterDiscountPrice(date);
+        price.getBeforeDiscountPrice();
+    }
+
+    private void orderResult() {
+        outputView.printOrderMessage();
+        showOrderList();
+    }
+
+    private void askDateAndMenu() {
         outputView.printWelcomeMessage();
         askDate();
         askMenuAndCount();
         outputView.printSaleIntroduceMessage(Integer.parseInt(date));
-        outputView.printOrderMessage();
-        showOrderList();
-        outputView.printBeforeDiscountMessage();
-        showBeforeDiscountPrice();
-        price.getAfterDiscountPrice(date);
-        outputView.printFreebieMessage();
-        price.getBeforeDiscountPrice();
-        showPresentation();
-        outputView.printBenefitMessage();
-        showBenefitList();
-        outputView.printTotalBenefitPriceMessage();
-        showTotalBenefitPrice();
-        outputView.printAfterDiscountMessage();
-        showFinalPrice();
-        outputView.printBadgeMessage();
-        showBadge();
     }
 
     private void showOrderList() {
@@ -115,7 +147,7 @@ public class StartController {
         System.out.println(String.format("-%s%s",decimalFormat.format(discountPrice),WON.get()));
     }
     private void showFinalPrice() {
-        if (excludeChampagnePrice()){
+        if (plusChampagnePrice()){
             System.out.println(String.format("%s%s",
                     decimalFormat.format(price.beforeDiscountPrice - discountPrice), WON.get())
             );
@@ -125,10 +157,15 @@ public class StartController {
                 decimalFormat.format(price.beforeDiscountPrice - discountPrice + IntegerConstant.CHAMPAGNE_PRICE.get()), WON.get())
         );
     }
-    private boolean excludeChampagnePrice() {
-        if (takeOrder.getOrderList().contains(StringConstant.CHAMPAGNE) && price.getDiscount().containsKey(SPECIAL_EVENT.get())) {
-            return true;
-        }
+    private boolean plusChampagnePrice() {
+        if (orderChampagne() && price.getDiscount().containsKey(SPECIAL_EVENT.get())) return false;
+        if(orderChampagne() && !price.getDiscount().containsKey(SPECIAL_EVENT.get())) return true;
+        if(!orderChampagne()&&price.getDiscount().containsKey(SPECIAL_EVENT.get())) return false;
+        return true;
+    }
+
+    private boolean orderChampagne() {
+        if(takeOrder.getOrderList().contains(CHAMPAGNE.get())) return true;
         return false;
     }
 

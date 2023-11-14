@@ -7,7 +7,7 @@ public enum Output {
     TOTAL_PRICE_BEFORE_SALE_MESSAGE("\n<할인 전 총주문 금액>"),
     FREEBIE_MESSAGE("\n<증정 메뉴>"),
     BENEFIT_CONTENT_MESSAGE("<혜택 내역>"),
-    TOTAL_BENEFIT_PRICE_MESSAGE("<총혜택 금액>\n"),
+    TOTAL_BENEFIT_PRICE_MESSAGE("<총혜택 금액>"),
     TOTAL_PRICE_AFTER_SALE_MESSAGE("<할인 후 예상 결제 금액>\n"),
     EVENT_BADGE_MESSAGE("<12월 이벤트 배지>\n"),
     ;

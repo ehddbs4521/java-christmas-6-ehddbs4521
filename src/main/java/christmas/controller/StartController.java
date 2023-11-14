@@ -11,6 +11,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static christmas.model.calculate.Event.PRESENTATION_EVENT;
+import static christmas.model.validator.IntegerConstant.ZERO;
 import static christmas.model.validator.StringConstant.*;
 
 
@@ -24,6 +25,7 @@ public class StartController {
     public static String SPECIALORNOT;
     public static String WEEKENDORNOT;
     private static String date;
+    private static int discountPrice;
 
     public void start() {
         outputView.printWelcomeMessage();
@@ -41,8 +43,8 @@ public class StartController {
         outputView.printBenefitMessage();
         showBenefitList();
         outputView.printTotalBenefitPriceMessage();
+        showTotalBenefitPrice();
     }
-
 
     private void showOrderList() {
         takeOrder.getOrderList().stream().forEach(System.out::println);
@@ -96,9 +98,16 @@ public class StartController {
             return;
         }
         price.getDiscount().entrySet().stream()
-                .map(entry -> String.format("%s-%s",entry.getKey(),decimalFormat.format(entry.getValue())))
+                .map(entry -> String.format("%s-%s%s",entry.getKey(),decimalFormat.format(entry.getValue()),WON.get()))
                 .forEach(System.out::println);    }
-
+    private void showTotalBenefitPrice() {
+        discountPrice = price.getDiscount().values().stream().mapToInt(Integer::intValue).sum();
+        if (discountPrice == 0) {
+            System.out.println(ZERO.get()+WON.get());
+            return;
+        }
+        System.out.println(String.format("-%s%s",decimalFormat.format(discountPrice),WON.get()));
+    }
     private static List<String> getMenuAndCount(String menuAndCount) {
         return Arrays.asList(menuAndCount.split(COMMA.get()));
     }

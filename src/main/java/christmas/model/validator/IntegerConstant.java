@@ -12,6 +12,7 @@ public enum IntegerConstant {
     SPECIAL_DISCOUNT_PRICE(1000),
     PRESENTATION_CONDITION_PRICE(120000),
     CHAMPAGNE(25000),
+    ZERO(0),
     ;
     private final Integer number;
 
